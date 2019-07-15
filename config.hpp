@@ -2,6 +2,8 @@
 
 #include "types.hpp"
 
+enum Format { FORMAT_2019, FORMAT_2018, FORMAT_OLD };	// Currently using only the latest format
+
 class Config {
 public:
 	static Config& instance() {
@@ -14,5 +16,6 @@ private:
 	Config(const Config&) = delete;
 	Config& operator=(const Config&) = delete;
 
-	uint8_t 
+	uint8_t frequency;
+	Format format;
 };
