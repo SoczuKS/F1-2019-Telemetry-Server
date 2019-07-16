@@ -17,13 +17,14 @@ bool Server::init() {
 		return false;
 	}
 
-	memset(&this->serverAddress, 0, sizeof(this->serverAddress));
+	memset(&this->serverAddress, 0, sizeof(sockaddr_in));
+	memset(&this->clientAddress, 0, sizeof(sockaddr_in));
 
 	this->serverAddress.sin_family = AF_INET;
 	this->serverAddress.sin_addr.s_addr = INADDR_ANY;
 	this->serverAddress.sin_port = htons(Config::instance().getPort());
 
-	if (bind(this->socketfd, reinterpret_cast<sockaddr*>(&this->serverAddress), sizeof(this->serverAddress) < 0)) {
+	if (bind(this->socketfd, reinterpret_cast<sockaddr*>(&this->serverAddress), sizeof(this->serverAddress)) < 0) {
 		Logger::generateLogRecord("Bind failed", LOG_CRIT);
 		return false;
 	}
