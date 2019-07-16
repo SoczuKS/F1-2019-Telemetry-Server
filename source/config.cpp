@@ -17,8 +17,8 @@ void Config::load() {
 
 		if (propName == "Frequency") {
 			this->frequency = static_cast<uint16>(std::stoi(propValue));
-			for (auto i : frequencies) {
-				if (i == this->frequency) {
+			for (auto f : frequencies) {
+				if (f == this->frequency) {
 					propertiesRead++;
 					break;
 				}
@@ -32,7 +32,7 @@ void Config::load() {
 		}
 	}
 
-	if (propertiesRead != propertiesNum) { reset(); save(); }
+	if (propertiesRead != propertiesNum) { reset(); }
 
 	file.close();
 }
