@@ -11,7 +11,9 @@
 
 #include "packetHeader.hpp"
 
-struct CarTelemetryData {
+constexpr uint16 CarTelemetryPacketSize = 1347;
+
+struct CarTelemetry {
 	uint16 speed;									// in Kph
 	float throttle;									// 0.0 - 1.0
 	float steer;									// -1.0 (full lock left), 1.0 (full lock right))
@@ -29,9 +31,9 @@ struct CarTelemetryData {
 	std::array<uint8, 4> surfaceType;				// Driving surface, see appendices
 };
 
-struct PacketCarTelemetryData {
+struct CarTelemetryPacket {
 	PacketHeader header;	      
 
-	std::array<CarTelemetryData, 20> carTelemetryData;
+	std::array<CarTelemetry, 20> carTelemetry;
 	uint32 buttonStatus;								// Bit flags specifying which buttons are being pressed currently - see appendices
 };

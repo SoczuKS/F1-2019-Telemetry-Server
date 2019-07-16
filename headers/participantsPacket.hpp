@@ -13,7 +13,9 @@
 
 #include "packetHeader.hpp"
 
-struct ParticipantData {
+constexpr uint16 ParticipantsPacketSize = 1104;
+
+struct Participant {
 	uint8      aiControlled;	// 0 = Human, 1 = AI
 	uint8      driverId;
 	uint8      teamId;
@@ -23,9 +25,9 @@ struct ParticipantData {
 	uint8      yourTelemetry;	// 0 = restricted, 1 = public
 };
 
-struct PacketParticipantsData {
+struct ParticipantsPacket {
 	PacketHeader    header;
 
 	uint8           numActiveCars;
-	std::array<ParticipantData, 20> participants;
+	std::array<Participant, 20> participants;
 };

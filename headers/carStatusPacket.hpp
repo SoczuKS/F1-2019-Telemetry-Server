@@ -11,7 +11,9 @@
 
 #include "packetHeader.hpp"
 
-struct CarStatusData {
+constexpr uint16 CarStatusPacketSize = 1143;
+
+struct CarStatus {
 	uint8 tractionControl;          // 0 (off) - 2 (high)
 	uint8 antiLockBrakes;           // 0 (off) - 1 (on)
 	uint8 fuelMix;                  // 0 = lean, 1 = standard, 2 = rich, 3 = max
@@ -40,8 +42,8 @@ struct CarStatusData {
 	float ersDeployedThisLap;
 };
 
-struct PacketCarStatusData {
+struct CarStatusPacket {
 	PacketHeader header;
 
-	std::array<CarStatusData, 20> carStatusData;
+	std::array<CarStatus, 20> carStatus;
 };

@@ -1,10 +1,8 @@
-#include "logger.hpp"
-
-#include <syslog.h>
+#include "../headers/logger.hpp"
 
 void Logger::generateLogRecord(std::string entry, int priority) {
 	time_t t = time(nullptr);
-	struct tm* now = localtime(&t);
+	tm* now = localtime(&t);
 
 	char date[80];
 	strftime(date, sizeof(date), "%Y-%m-%d_%H:%M:%S", now);

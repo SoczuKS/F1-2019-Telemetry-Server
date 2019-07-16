@@ -1,4 +1,4 @@
-#include "config.hpp"
+#include "../headers/config.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -27,8 +27,8 @@ void Config::load() {
 			this->format = static_cast<Format>(std::stoi(propValue));
 			propertiesRead++;
 		} else if (propName == "Port") {
-			this->port = std::stoi(propValue);
-			if (this->port > 0 && this->port <= 65535) propertiesRead++;
+			this->port = static_cast<uint16>(std::stoi(propValue));
+			propertiesRead++;
 		}
 	}
 

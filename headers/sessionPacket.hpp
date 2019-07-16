@@ -11,12 +11,14 @@
 
 #include "packetHeader.hpp"
 
+constexpr uint16 SessionPacketSize = 149;
+
 struct MarshalZone {
 	float zoneStart;	// Fraction (0..1) of way through the lap the marshal zone starts
 	int8 zoneFlag;		// -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
 };
 
-struct PacketSessionData {
+struct SessionPacket {
 	PacketHeader    header;
 
 	uint8           weather;              		// 0 = clear, 1 = light cloud, 2 = overcast, 3 = light rain, 4 = heavy rain, 5 = storm

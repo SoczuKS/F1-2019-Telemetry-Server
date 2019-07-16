@@ -12,7 +12,9 @@
 
 #include "packetHeader.hpp"
 
-struct CarMotionData {
+constexpr uint16 MotionDataPacketSize = 1343;
+
+struct CarMotion {
 	float worldPositionX, worldPositionY, worldPositionZ;
 	float worldVelocityX, worldVelocityY, worldVelocityZ;
 	int16 worldForwardDirX, worldForwardDirY, worldForwardDirZ;
@@ -21,10 +23,10 @@ struct CarMotionData {
 	float yaw, pitch, roll;
 };
 
-struct PacketMotionData {
+struct MotionPacket {
 	PacketHeader header;
 
-	std::array<CarMotionData, 20> carMotionData;
+	std::array<CarMotion, 20> carMotion;
 
 	// Extra player car ONLY data
 	// Each wheel array have the following order: RearLeft, RearRight, FrontLeft, FrontRight

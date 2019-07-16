@@ -1,6 +1,33 @@
 #include <iostream>
+#include <memory>
+#include <csignal>
+
+#include "../headers/logger.hpp"
+#include "../headers/server.hpp"
+
+std::shared_ptr<Server> server;
+
+void signalHandler(int signum) {
+	if (signum == SIGINT || signum == SIGTERM) {
+		server->stop();
+	}
+}
 
 int main(int argc, char* arg[]) {
-	std::cout << "Hello" << std::endl;
+	signal(SIGINT, signalHandler);
+	signal(SIGTERM, signalHandler);
+
+	server = std::make_shared<Server>();
+
+	openlog("F1 2019 Telemetry", LOG_CONS | LOG_NDELAY | LOG_PERROR, LOG_USER);
+
+	if (!server->init()) {
+		std::cerr << "Failed to initialize server. See logs";
+		return 1;
+	}
+
+	server->run();
+
+	closelog();
 	return 0;
 }

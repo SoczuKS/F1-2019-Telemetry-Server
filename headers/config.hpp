@@ -35,8 +35,8 @@ public:
 	Format getFormat() const { return format; }
 	void setFormat(const Format f) { format = f; }
 
-	uint32 getPort() const { return port; }
-	void setPort(uint32 p) { if (p > 0 && p <= 65535) port = p; }
+	uint16 getPort() const { return port; }
+	void setPort(uint16 p) { port = p; }
 
 private:
 	Config() { load(); }
@@ -45,7 +45,7 @@ private:
 
 	uint16 frequency;	// in Hertz
 	Format format;
-	uint32 port;
+	uint16 port;
 
 	const std::string configFileName = "config.cfg";
 

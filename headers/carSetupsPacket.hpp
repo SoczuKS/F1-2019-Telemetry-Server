@@ -11,7 +11,9 @@
 
 #include "packetHeader.hpp"
 
-struct CarSetupData {
+constexpr uint16 CarSetupPacketSize = 843;
+
+struct CarSetup {
 	uint8     frontWing, rearWing;
 	uint8     onThrottle;									// Differential adjustment on throttle (percentage)
 	uint8     offThrottle;									// Differential adjustment off throttle (percentage)
@@ -29,8 +31,8 @@ struct CarSetupData {
 	float     fuelLoad;
 };
 
-struct PacketCarSetupData {
+struct CarSetupPacket {
 	PacketHeader header;
 
-	std::array<CarSetupData, 20> carSetups;
+	std::array<CarSetup, 20> carSetup;
 };

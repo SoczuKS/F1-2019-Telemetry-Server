@@ -11,6 +11,8 @@
 
 #include "packetHeader.hpp"
 
+constexpr uint16 LapDataPacketSize = 843;
+
 struct LapData {
 	float       lastLapTime;		// in seconds
 	float       currentLapTime;		// in seconds
@@ -31,7 +33,7 @@ struct LapData {
 	uint8       resultStatus;		// 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
 };
 
-struct PacketLapData {
+struct LapDataPacket {
 	PacketHeader header;
 
 	std::array<LapData, 20> lapData;

@@ -11,9 +11,9 @@
 
 #include "packetHeader.hpp"
 
-// The event details packet is different for each type of event.
-// Make sure only the correct type is interpreted.
-union EventDataDetails {
+constexpr uint16 EventPacketSize = 32;
+
+union EventDetails {
 	struct {
 		uint8 vehicleIdx; // Vehicle index of car achieving fastest lap
 		float lapTime;    // Lap time is in seconds
@@ -32,11 +32,11 @@ union EventDataDetails {
 	} RaceWinner;
 };
 
-struct PacketEventData {
+struct EventPacket {
 	PacketHeader header;
 
 	std::array<uint8, 4> eventStringCode;	// Event string code, see below
-	EventDataDetails eventDetails;			// Event details - should be interpreted differently for each type
+	EventDetails eventDetails;			// Event details - should be interpreted differently for each type
 };
 
 /*
