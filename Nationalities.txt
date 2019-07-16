@@ -1,0 +1,86 @@
+1 American
+31 Greek
+61 Panamanian
+2 Argentinean
+32 Guatemalan
+62 Paraguayan
+3 Australian
+33 Honduran
+63 Peruvian
+4 Austrian
+34 Hong Konger
+64 Polish
+5 Azerbaijani
+35 Hungarian
+65 Portuguese
+6 Bahraini
+36 Icelander
+66 Qatari
+7 Belgian
+37 Indian
+67 Romanian
+8 Bolivian
+38 Indonesian
+68 Russian
+9 Brazilian
+39 Irish
+69 Salvadoran
+10 British
+40 Israeli
+70 Saudi
+11 Bulgarian
+41 Italian
+71 Scottish
+12 Cameroonian
+42 Jamaican
+72 Serbian
+13 Canadian
+43 Japanese
+73 Singaporean
+14 Chilean
+44 Jordanian
+74 Slovakian
+15 Chinese
+45 Kuwaiti
+75 Slovenian
+16 Colombian
+46 Latvian
+76 South Korean
+17 Costa Rican
+47 Lebanese
+77 South African
+18 Croatian
+48 Lithuanian
+78 Spanish
+19 Cypriot
+49 Luxembourger
+79 Swedish
+20 Czech
+50 Malaysian
+80 Swiss
+21 Danish
+51 Maltese
+81 Thai
+22 Dutch
+52 Mexican
+82 Turkish
+23 Ecuadorian
+53 Monegasque
+83 Uruguayan
+24 English
+54 New Zealander
+84 Ukrainian
+25 Emirian
+55 Nicaraguan
+85 Venezuelan
+26 Estonian
+56 North Korean
+86 Welsh
+27 Finnish
+57 Northern Irish
+28 French
+58 Norwegian
+29 German
+59 Omani
+30 Ghanaian
+60 Pakistani
