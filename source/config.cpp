@@ -15,15 +15,7 @@ void Config::load() {
 
 		if (!(iss >> propName >> propValue)) { break; }
 
-		if (propName == "Frequency") {
-			this->frequency = static_cast<uint16>(std::stoi(propValue));
-			for (auto f : frequencies) {
-				if (f == this->frequency) {
-					propertiesRead++;
-					break;
-				}
-			}
-		} else if (propName == "Format") {
+		if (propName == "Format") {
 			this->format = static_cast<Format>(std::stoi(propValue));
 			propertiesRead++;
 		} else if (propName == "Port") {
@@ -38,7 +30,6 @@ void Config::load() {
 }
 
 void Config::reset() {
-	this->frequency = 20;
 	this->format = FORMAT_2019;
 	this->port = 20777;
 
@@ -48,7 +39,6 @@ void Config::reset() {
 void Config::save() {
 	std::ofstream file(configFileName, std::ios::out | std::ios::trunc);
 
-	file << "Frequency " << this->frequency << '\n';
 	file << "Format " << this->format << '\n';
 	file << "Port " << this->port << '\n';
 

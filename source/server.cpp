@@ -35,13 +35,14 @@ bool Server::init() {
 void Server::run() {
 	char buffer[MaxSize];
 	unsigned int length;
-	ssize_t n;
+	ssize_t packetSize;
 
 	while (running) {
-		n = recvfrom(socketfd, static_cast<char*>(buffer), MaxSize, MSG_WAITALL, reinterpret_cast<sockaddr*>(&clientAddress), &length);
-		buffer[n] = '\0';
+		packetSize = recvfrom(socketfd, &buffer, MaxSize, MSG_DONTWAIT, reinterpret_cast<sockaddr*>(&clientAddress), &length);
 
-		std::cout << buffer;
+		if (packetSize > 0) {
+			std::cout << packetSize << ' ';
+		}
 	}
 }
 

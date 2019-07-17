@@ -8,7 +8,7 @@
 std::shared_ptr<Server> server;
 
 void signalHandler(int signum) {
-	if (signum == SIGINT || signum == SIGTERM) {
+	if (signum == SIGINT || signum == SIGTERM || signum == SIGQUIT || signum == SIGABRT) {
 		server->stop();
 	}
 }
@@ -16,6 +16,8 @@ void signalHandler(int signum) {
 int main(int argc, char* arg[]) {
 	signal(SIGINT, signalHandler);
 	signal(SIGTERM, signalHandler);
+	signal(SIGQUIT, signalHandler);
+	signal(SIGABRT, signalHandler);
 
 	server = std::make_shared<Server>();
 
