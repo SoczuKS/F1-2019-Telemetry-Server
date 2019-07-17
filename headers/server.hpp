@@ -3,9 +3,7 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
-#include "packets.hpp"
-
-constexpr uint16 MaxSize = CarTelemetryPacketSize;
+#include "packet.hpp"
 
 class Server {
 public:
@@ -22,5 +20,14 @@ private:
 	sockaddr_in serverAddress;
 	sockaddr_in clientAddress;
 
-	void analyzePacket();
+	void analyzePacket(Packet);
+
+	void analyzeCarSetups(CarSetupPacket&);
+	void analyzeCarStatus(CarStatusPacket&);
+	void analyzeCarTelemetry(CarTelemetryPacket&);
+	void analyzeEvent(EventPacket&);
+	void analyzeLapData(LapDataPacket&);
+	void analyzeMotion(MotionPacket&);
+	void analyzeParticipants(ParticipantsPacket&);
+	void analyzeSession(SessionPacket&);
 };
