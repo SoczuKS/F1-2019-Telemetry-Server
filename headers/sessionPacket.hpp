@@ -11,35 +11,74 @@
 
 #include "packetHeader.hpp"
 
+enum class Track : int8 {
+	UNKNOWN = -1,
+	AUSTRALIA,
+	FRANCE,
+	CHINA,
+	BAHRAIN,
+	SPAIN,
+	MONACO,
+	CANADA,
+	GREATBRITAIN,
+	GERMANY,
+	HUNGARY,
+	BELGIUM,
+	ITALY,
+	SINGAPORE,
+	JAPAN,
+	UAE,
+	USA,
+	BRAZIL,
+	AUSTRIA,
+	RUSSIA,
+	MEXICO,
+	AZERBAIJAN,
+	BAHRAIN_SHORT,
+	GREATBRITAIN_SHORT,
+	USA_SHORT,
+	JAPAN_SHORT,
+};
+
+enum class Formula : uint8 { F1_MODERN, F1_CLASSIC, F2, F1_GENERIC };
+
+enum class SessionType : uint8 { UNKNOWN, FP1, FP2, FP3, SP, Q1, Q2, Q3, SQ, OSQ, R, R2, TIME_TRIAL };
+
+enum class SafetyCarStatus : uint8 { NO_SAFETY_CAR, FULL_SAFETY_CAR, VIRTUAL_SAFETY_CAR };
+
+enum class Weather : uint8 { CLEAR, LIGHT_CLOUD, OVERCAST, LIGHT_RAIN, HEAVY_RAIN, STORM };
+
+enum class ZoneFlag : int8 { UNKNOWN_INVALID = -1, NONE, GREEN, BLUE, YELLOW, RED };
+
 constexpr uint16 SessionPacketSize = 149;
 
 #pragma pack(push, 1)
 struct MarshalZone {
 	float zoneStart;	// Fraction (0..1) of way through the lap the marshal zone starts
-	int8 zoneFlag;		// -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
+	ZoneFlag zoneFlag;
 };
 
 struct SessionPacket {
-	PacketHeader    header;
+	PacketHeader header;
 
-	uint8           weather;              		// 0 = clear, 1 = light cloud, 2 = overcast, 3 = light rain, 4 = heavy rain, 5 = storm
-	int8	        trackTemperature;    		// in degrees celsius
-	int8	        airTemperature;      		// in degrees celsius
-	uint8           totalLaps;           		// Total number of laps in this race
-	uint16          trackLength;           		// in metres
-	uint8           sessionType;         		// 0 = unknown, 1 = P1, 2 = P2, 3 = P3, 4 = Short P, 5 = Q1, 6 = Q2, 7 = Q3, 8 = Short Q, 9 = OSQ, 10 = R, 11 = R2, 12 = Time Trial
-	int8            trackId;         			// -1 for unknown, 0-21 for tracks, see appendix
-	uint8           formula;					// 0 = F1 Modern, 1 = F1 Classic, 2 = F2, 3 = F1 Generic
-	uint16          sessionTimeLeft;    		// in seconds
-	uint16          sessionDuration;     		// in seconds
-	uint8           pitSpeedLimit;      		// in Kph
-	uint8           gamePaused;
-	uint8           isSpectating;
-	uint8           spectatorCarIndex;
-	uint8           sliProNativeSupport;		// 0 = inactive, 1 = active
-	uint8           numMarshalZones;
+	Weather weather;
+	int8 trackTemperature;		// in degrees celsius
+	int8 airTemperature;		// in degrees celsius
+	uint8 totalLaps;			// Total number of laps in this race
+	uint16 trackLength;			// in metres
+	SessionType sessionType;
+	Track trackId;
+	Formula formula;
+	uint16 sessionTimeLeft;		// in seconds
+	uint16 sessionDuration;		// in seconds
+	uint8 pitSpeedLimit;		// in Kph
+	uint8 gamePaused;
+	uint8 isSpectating;
+	uint8 spectatorCarIndex;
+	bool sliProNativeSupport;
+	uint8 numMarshalZones;
 	std::array<MarshalZone, 21> marshalZones;
-	uint8           safetyCarStatus;			// 0 = no safety car, 1 = full safety car, 2 = virtual safety car
-	uint8           networkGame;				// 0 = offline, 1 = online
+	SafetyCarStatus safetyCarStatus;
+	bool networkGame;
 };
 #pragma pack(pop)

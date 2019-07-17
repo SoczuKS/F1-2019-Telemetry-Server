@@ -11,27 +11,35 @@
 
 #include "packetHeader.hpp"
 
+enum class DriverStatus : uint8 { IN_GARAGE, FLYING_LAP, IN_LAP, OUT_LAP, ON_TRACK };
+
+enum class Sector : uint8 { SECTOR1, SECTOR2, SECTOR3 };
+
+enum class PitStatus : uint8 { NONE, PITTING, IN_PIT_AREA };
+
+enum class ResultStatus : uint8 { INVALID, INACTIVE, ACTIVE, FINISHED, DISQUALIFIED, NOT_CLASSIFIED, RETIRED };
+
 constexpr uint16 LapDataPacketSize = 843;
 
 #pragma pack(push, 1)
 struct LapData {
-	float       lastLapTime;		// in seconds
-	float       currentLapTime;		// in seconds
-	float       bestLapTime;		// in seconds
-	float       sector1Time;		// in seconds
-	float       sector2Time;		// in seconds
-	float       lapDistance;		// Distance vehicle is around current lap in metres – could be negative if line hasn’t been crossed yet
-	float       totalDistance;		// in metres – could be negative if line hasn’t been crossed yet
-	float       safetyCarDelta;		// in seconds
-	uint8       carPosition;
-	uint8       currentLapNum;
-	uint8       pitStatus;			// 0 = none, 1 = pitting, 2 = in pit area
-	uint8       sector;				// 0 = sector1, 1 = sector2, 2 = sector3
-	uint8       currentLapInvalid;	// 0 = valid, 1 = invalid
-	uint8       penalties;			// in seconds, accumulated
-	uint8       gridPosition;
-	uint8       driverStatus;		// 0 = in garage, 1 = flying lap, 2 = in lap, 3 = out lap, 4 = on track
-	uint8       resultStatus;		// 0 = invalid, 1 = inactive, 2 = active, 3 = finished, 4 = disqualified, 5 = not classified, 6 = retired
+	float lastLapTime;		// in seconds
+	float currentLapTime;	// in seconds
+	float bestLapTime;		// in seconds
+	float sector1Time;		// in seconds
+	float sector2Time;		// in seconds
+	float lapDistance;		// Distance vehicle is around current lap in metres – could be negative if line hasn’t been crossed yet
+	float totalDistance;	// in metres – could be negative if line hasn’t been crossed yet
+	float safetyCarDelta;	// in seconds
+	uint8 carPosition;
+	uint8 currentLapNum;
+	PitStatus pitStatus;
+	uint8 sector;
+	bool currentLapInvalid;
+	uint8 penalties;		// in seconds, accumulated
+	uint8 gridPosition;
+	DriverStatus driverStatus;
+	ResultStatus resultStatus;
 };
 
 struct LapDataPacket {

@@ -16,28 +16,28 @@ constexpr uint16 EventPacketSize = 32;
 #pragma pack(push, 1)
 union EventDetails {
 	struct {
-		uint8 vehicleIdx; // Vehicle index of car achieving fastest lap
-		float lapTime;    // Lap time is in seconds
+		uint8 vehicleIndex;
+		float lapTime;
 	} FastestLap;
 
 	struct {
-		uint8 vehicleIdx; // Vehicle index of car retiring
+		uint8 vehicleIndex;
 	} Retirement;
 
 	struct {
-		uint8 vehicleIdx; // Vehicle index of team mate
+		uint8 vehicleIndex;
 	} TeamMateInPits;
 
 	struct {
-		uint8 vehicleIdx; // Vehicle index of the race winner
+		uint8 vehicleIndex;
 	} RaceWinner;
 };
 
 struct EventPacket {
 	PacketHeader header;
 
-	std::array<uint8, 4> eventStringCode;	// Event string code, see below
-	EventDetails eventDetails;			// Event details - should be interpreted differently for each type
+	std::array<uint8, 4> eventStringCode;	// See below
+	EventDetails eventDetails;
 };
 #pragma pack(pop)
 

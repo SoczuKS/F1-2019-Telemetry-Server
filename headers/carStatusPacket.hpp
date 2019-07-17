@@ -11,33 +11,42 @@
 
 #include "packetHeader.hpp"
 
+enum class FuelMix : uint8 { LEAN, STANDARD, RICH, MAX };
+
+enum class TyreCompound : uint8 { C5 = 16, C4, C3, C2, C1, INTERMEDIATE = 7, WET, CLASSIC_DRY, CLASSIC_WET, F2_SUPERSOFT, F2_SOFT, F2_MEDIUM, F2_HARD, F2_WET};
+
+enum class VisualTyreCompound : uint8 { SOFT = 16, MEDIUM, HARD, INTERMEDIATE = 7, WET };
+
+enum class ERSMode : uint8 { NONE, LOW, MEDIUM, HIGH, OVERTAKE, HOTLAP };
+
+enum class VehicleFIAFlags : int8 { UNKNOWN_INVALID = -1, NONE, GREEN, BLUE, YELLOW, RED };
+
 constexpr uint16 CarStatusPacketSize = 1143;
 
 #pragma pack(push, 1)
 struct CarStatus {
-	uint8 tractionControl;          // 0 (off) - 2 (high)
-	uint8 antiLockBrakes;           // 0 (off) - 1 (on)
-	uint8 fuelMix;                  // 0 = lean, 1 = standard, 2 = rich, 3 = max
-	uint8 frontBrakeBias;           // percentage
-	uint8 pitLimiterStatus;         // 0 = off, 1 = on
+	uint8 tractionControl;				// 0 (off) - 2 (high)
+	bool antiLockBrakes;
+	FuelMix fuelMix;
+	uint8 frontBrakeBias;				// percentage
+	bool pitLimiterStatus;
 	float fuelInTank;
 	float fuelCapacity;
-	float fuelRemainingLaps;        // Fuel remaining in terms of laps (value on MFD)
+	float fuelRemainingLaps;			// Fuel remaining in terms of laps (value on MFD)
 	uint16 maxRPM, idleRPM;
 	uint8 maxGears;
 	uint8 drsAllowed;					// 0 = not allowed, 1 = allowed, -1 = unknown
-	std::array<uint8, 4> tyresWear;     //  percentage
 
-	uint8 actualTyreCompound;			// F1 Modern - 16 = C5, 17 = C4, 18 = C3, 19 = C2, 20 = C1, 7 = inter, 8 = wet
-										// F1 Classic - 9 = dry, 10 = wet
-										// F2 – 11 = super soft, 12 = soft, 13 = medium, 14 = hard, 15 = wet
+	TyreCompound actualTyreCompound;
+	uint8 tyreVisualCompound;
 
-	uint8 tyreVisualCompound;			//  16 = soft, 17 = medium, 18 = hard, 7 = inter, 8 = wet
+	std::array<uint8, 4> tyresWear;     // percentage
 	std::array<uint8, 4> tyresDamage;	// percentage
 	uint8 frontLeftWingDamage, frontRightWingDamage, rearWingDamage, engineDamage, gearBoxDamage;	// percentage
-	int8 vehicleFiaFlags;			// -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
-	float ersStoreEnergy;           // ERS energy store in Joules
-	uint8 ersDeployMode;            // 0 = none, 1 = low, 2 = medium,3 = high, 4 = overtake, 5 = hotlap
+
+	VehicleFIAFlags vehicleFiaFlags;
+	float ersStoreEnergy;				// ERS energy store in Joules
+	ERSMode ersDeployMode;
 	float ersHarvestedThisLapMGUK;
 	float ersHarvestedThisLapMGUH;
 	float ersDeployedThisLap;
