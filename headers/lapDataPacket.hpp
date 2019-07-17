@@ -13,6 +13,7 @@
 
 constexpr uint16 LapDataPacketSize = 843;
 
+#pragma pack(push, 1)
 struct LapData {
 	float       lastLapTime;		// in seconds
 	float       currentLapTime;		// in seconds
@@ -38,3 +39,4 @@ struct LapDataPacket {
 
 	std::array<LapData, 20> lapData;
 };
+#pragma pack(pop)

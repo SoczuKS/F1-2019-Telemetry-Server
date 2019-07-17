@@ -13,6 +13,7 @@
 
 constexpr uint16 SessionPacketSize = 149;
 
+#pragma pack(push, 1)
 struct MarshalZone {
 	float zoneStart;	// Fraction (0..1) of way through the lap the marshal zone starts
 	int8 zoneFlag;		// -1 = invalid/unknown, 0 = none, 1 = green, 2 = blue, 3 = yellow, 4 = red
@@ -41,3 +42,4 @@ struct SessionPacket {
 	uint8           safetyCarStatus;			// 0 = no safety car, 1 = full safety car, 2 = virtual safety car
 	uint8           networkGame;				// 0 = offline, 1 = online
 };
+#pragma pack(pop)

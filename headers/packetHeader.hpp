@@ -2,6 +2,7 @@
 
 #include "types.hpp"
 
+#pragma pack(push, 1)
 struct PacketHeader {
 	uint16 packetFormat;
 	uint8 gameMajorVersion;
@@ -13,6 +14,7 @@ struct PacketHeader {
 	uint32 frameIdentifier;
 	uint8 playerCarIndex;
 };
+#pragma pack(pop)
 
 enum PacketID {
 	PACKET_MOTION = 0,

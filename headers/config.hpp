@@ -5,10 +5,9 @@
 
 #include "types.hpp"
 
-constexpr uint8 propertiesNum = 3;
+constexpr uint8 propertiesNum = 2;
 
 enum Format { FORMAT_2019 = 0, FORMAT_2018, FORMAT_OLD };	// Currently using only the latest format
-constexpr std::array<uint16, 4> frequencies = { 10, 20, 30, 60 };
 
 class Config {
 public:
@@ -22,16 +21,6 @@ public:
 	void save();
 	void reset();
 
-	uint16 getFrequency() const { return frequency; }
-	void setFrequency(const uint16 freq) {
-		for (auto f : frequencies) {
-			if (f == freq) {
-				frequency = freq;
-				return;
-			}
-		}
-	}
-
 	Format getFormat() const { return format; }
 	void setFormat(const Format f) { format = f; }
 
@@ -43,7 +32,6 @@ private:
 	Config(const Config&) = delete;
 	Config& operator=(const Config&) = delete;
 
-	uint16 frequency;	// in Hertz
 	Format format;
 	uint16 port;
 

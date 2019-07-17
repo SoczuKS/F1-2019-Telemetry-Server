@@ -13,6 +13,7 @@
 
 constexpr uint16 CarTelemetryPacketSize = 1347;
 
+#pragma pack(push, 1)
 struct CarTelemetry {
 	uint16 speed;									// in Kph
 	float throttle;									// 0.0 - 1.0
@@ -37,3 +38,4 @@ struct CarTelemetryPacket {
 	std::array<CarTelemetry, 20> carTelemetry;
 	uint32 buttonStatus;								// Bit flags specifying which buttons are being pressed currently - see appendices
 };
+#pragma pack(pop)

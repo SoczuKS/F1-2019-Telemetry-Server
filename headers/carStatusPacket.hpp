@@ -13,6 +13,7 @@
 
 constexpr uint16 CarStatusPacketSize = 1143;
 
+#pragma pack(push, 1)
 struct CarStatus {
 	uint8 tractionControl;          // 0 (off) - 2 (high)
 	uint8 antiLockBrakes;           // 0 (off) - 1 (on)
@@ -47,3 +48,4 @@ struct CarStatusPacket {
 
 	std::array<CarStatus, 20> carStatus;
 };
+#pragma pack(pop)

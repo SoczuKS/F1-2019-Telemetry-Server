@@ -13,6 +13,7 @@
 
 constexpr uint16 CarSetupPacketSize = 843;
 
+#pragma pack(push, 1)
 struct CarSetup {
 	uint8     frontWing, rearWing;
 	uint8     onThrottle;									// Differential adjustment on throttle (percentage)
@@ -36,3 +37,4 @@ struct CarSetupPacket {
 
 	std::array<CarSetup, 20> carSetup;
 };
+#pragma pack(pop)

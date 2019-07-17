@@ -13,6 +13,7 @@
 
 constexpr uint16 EventPacketSize = 32;
 
+#pragma pack(push, 1)
 union EventDetails {
 	struct {
 		uint8 vehicleIdx; // Vehicle index of car achieving fastest lap
@@ -38,6 +39,7 @@ struct EventPacket {
 	std::array<uint8, 4> eventStringCode;	// Event string code, see below
 	EventDetails eventDetails;			// Event details - should be interpreted differently for each type
 };
+#pragma pack(pop)
 
 /*
 	Event String Codes

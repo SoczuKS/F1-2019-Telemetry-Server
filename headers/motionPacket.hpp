@@ -14,6 +14,7 @@
 
 constexpr uint16 MotionDataPacketSize = 1343;
 
+#pragma pack(push, 1)
 struct CarMotion {
 	float worldPositionX, worldPositionY, worldPositionZ;
 	float worldVelocityX, worldVelocityY, worldVelocityZ;
@@ -37,3 +38,4 @@ struct MotionPacket {
 	float angularAccelerationX, angularAccelerationY, angularAccelerationZ;
 	float frontWheelsAngle;
 };
+#pragma pack(pop)

@@ -15,6 +15,7 @@
 
 constexpr uint16 ParticipantsPacketSize = 1104;
 
+#pragma pack(push, 1)
 struct Participant {
 	uint8      aiControlled;	// 0 = Human, 1 = AI
 	uint8      driverId;
@@ -31,3 +32,4 @@ struct ParticipantsPacket {
 	uint8           numActiveCars;
 	std::array<Participant, 20> participants;
 };
+#pragma pack(pop)
